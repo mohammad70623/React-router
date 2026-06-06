@@ -7,6 +7,11 @@ const Users = () => {
     return (
         <div>
             <h2>This is Users Page</h2>
+            <div>
+                {
+                    users.map(user => <Users key={user.id} user={user}></Users>)
+                }
+            </div>
         </div>
     );
 };
