@@ -11,6 +11,9 @@ import Mobiles from './components/Mobiles/Mobiles.jsx';
 import Laptops from './components/Laptops/Laptops.jsx';
 import Users from './components/Users/Users.jsx';
 import UserDetails from './components/UserDetails/UserDetails.jsx';
+import Users2 from './components/Users2/Users2.jsx';
+import Posts from './components/Posts/Posts.jsx';
+import PostDetails from './components/PostDetails/PostDetails.jsx'; // এটা add করো
 
 const userPromise = fetch('https://jsonplaceholder.typicode.com/users').then(res=> res.json());
 
@@ -40,6 +43,17 @@ const router = createBrowserRouter([
     Component: UserDetails
   },
   {
+    path: 'posts',
+    loader: ()=> fetch('https://jsonplaceholder.typicode.com/posts'),
+    Component: Posts
+  },
+  {
+      path: 'posts/:postId',
+      loader: ({params})=> fetch(`https://jsonplaceholder.typicode.com/posts/${params.postId}`),
+      Component: PostDetails
+  }, 
+  
+  {
     path: "about",
     element: <div>About me</div>,
   },
@@ -51,6 +65,11 @@ const router = createBrowserRouter([
     path: "app",       
     Component: App,   
   },
+  {
+    path: '*',
+    element: <h3>Not Found: 404 status</h3>
+
+  } 
 ]);
 
 createRoot(document.getElementById('root')).render(
